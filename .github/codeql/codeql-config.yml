@@ -1,8 +1,11 @@
-packs:
+# .github/codeql/codeql-config.yml
+
+queries:
   # Use these packs for JavaScript analysis
   javascript:
     - scope/js-pack1
     - scope/js-pack2
+
   # Use these packs for Java analysis
   java:
     - scope/java-pack1
