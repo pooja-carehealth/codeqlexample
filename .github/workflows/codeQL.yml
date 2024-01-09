@@ -1,19 +1,18 @@
-name: CodeQL Analysis
+name: "Code Scanning - Action"
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  codeql-analysis:
-    name: CodeQL Analysis
+  CodeQL-Build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        codeql-version: [ 'latest' ]
+    permissions:
+      # required for all workflows
+      security-events: write
+      actions: read
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -22,5 +21,8 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
         with:
-          languages: javascript, java  # Replace with your project's languages
-          config-file: .github/codeqlexample/codeql-config.yml  # Specify the path to your config file
+          config-file: .github/codeql/codeql-config.yml
+          
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
